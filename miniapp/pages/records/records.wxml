@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="list" wx:if="{{records.length}}">
+    <view class="row" wx:for="{{records}}" wx:key="id">
+      <view class="dir-ico {{item.direction === 'in' ? 'dir-in' : 'dir-out'}}">
+        <view class="dir-arrow {{item.direction}}"></view>
+      </view>
+      <view class="row-body">
+        <view class="row-title">{{item.direction === 'in' ? '入馆' : '出馆'}}</view>
+        <view class="row-sub">{{item.pass_time_text}}</view>
+      </view>
+      <view class="row-gate">闸机 {{item.gate_id}}</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && !records.length}}">暂无通行记录</view>
+  <view class="loading" wx:if="{{loading}}">加载中…</view>
+</view>

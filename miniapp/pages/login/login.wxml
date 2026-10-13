@@ -1,0 +1,8 @@
+<view class="login-wrap">
+  <view class="logo-mark">🏛</view>
+  <view class="logo-title font-trad">菏泽市科技博物馆</view>
+  <view class="logo-sub">免费不免票 · 实名预约 · 扫码入馆</view>
+  <button class="enter-btn" type="primary" loading="{{logging}}" bindtap="ensureLogin">微信一键进入</button>
+  <view class="ink"></view>
+  <view class="foot">探索科学 · 点亮好奇</view>
+</view>

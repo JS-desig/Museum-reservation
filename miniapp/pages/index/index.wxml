@@ -1,0 +1,165 @@
+<!-- 首页 — 科技馆主题首页 (墨绿/宋体)
+     说明: 使用 navigationStyle:custom, 顶部品牌头由页面自绘;
+     系统状态栏与右上角胶囊由微信原生渲染, 故不重复绘制 -->
+<view class="page">
+  <!-- 顶部水墨山峦底纹 -->
+  <view class="ink-bg"></view>
+
+  <!-- ============ 品牌头部 ============ -->
+  <view class="topbar" style="padding-top:{{statusBarHeight}}px;">
+    <!-- padding-right 预留右上角系统胶囊宽度, 避免文字被遮挡 -->
+    <view class="brand-row" style="padding-right:{{capsuleReserve}}px;">
+      <view class="brand-name font-trad">{{venueName}}</view>
+      <view class="brand-addr">
+        <view class="ico ico-pin"></view>
+        <text>{{venueAddr}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 搜索框 ============ -->
+  <!-- 搜索服务未上线: 点击给出提示, 避免误以为无响应 -->
+  <view class="searchbar" bindtap="onSearchTap">
+    <view class="ico ico-search"></view>
+    <text class="search-ph">搜索展厅、展项、科普活动</text>
+  </view>
+
+  <!-- ============ 主推展览 ============ -->
+  <view class="banner">
+    <view class="banner-wm"></view>
+    <view class="banner-main">
+      <view class="banner-text">
+        <view class="banner-title font-trad">{{banner.title}}</view>
+        <view class="banner-sub">{{banner.sub}}</view>
+        <view class="banner-date">{{banner.date}}</view>
+        <view class="banner-btn" bindtap="goBooking">立即预约</view>
+      </view>
+      <view class="banner-thumb">
+        <image wx:if="{{banner.image && !banner.imgFailed}}" class="banner-thumb-img" src="{{banner.image}}"
+               mode="aspectFill" lazy-load binderror="onBannerImgError" />
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 四宫格快捷入口 ============ -->
+  <view class="quick">
+    <view class="quick-item" bindtap="onQuickTap" data-key="booking">
+      <view class="quick-ico"><view class="ico ico-calendar"></view></view>
+      <view class="quick-label">预约参观</view>
+    </view>
+    <view class="quick-item" bindtap="onQuickTap" data-key="scan">
+      <view class="quick-ico"><view class="ico ico-scan"></view></view>
+      <view class="quick-label">扫码通行</view>
+    </view>
+    <view class="quick-item" bindtap="onQuickTap" data-key="reservations">
+      <view class="quick-ico"><view class="ico ico-ticket"></view></view>
+      <view class="quick-label">我的预约</view>
+    </view>
+    <view class="quick-item" bindtap="onQuickTap" data-key="mine">
+      <view class="quick-ico"><view class="ico ico-user"></view></view>
+      <view class="quick-label">个人中心</view>
+    </view>
+  </view>
+
+  <!-- ============ 热门展项 (数据源: GET /exhibits) ============ -->
+  <view class="m-section">
+    <view class="m-head">
+      <view class="m-title font-trad">热门展项</view>
+      <view class="m-more" bindtap="goExhibits">
+        <text>查看更多</text>
+        <view class="ico ico-chevron"></view>
+      </view>
+    </view>
+
+    <block wx:if="{{exhibits.length}}">
+      <view class="m-card" wx:for="{{exhibits}}" wx:key="id" bindtap="goExhibits">
+        <view class="m-poster">
+          <!-- video/audio 类型无海报, 图片加载失败时回落占位 (binderror) -->
+          <image wx:if="{{item.img && !item.imgFailed}}" class="m-poster-img" src="{{item.img}}"
+                 mode="aspectFill" lazy-load binderror="onExhibitImgError" data-index="{{index}}" />
+          <view wx:else class="m-poster-ph">{{item.ph}}</view>
+          <view wx:if="{{item.is_special}}" class="special-badge">付费体验</view>
+        </view>
+        <view class="m-info">
+          <view>
+            <view class="m-name font-trad">{{item.title}}</view>
+            <view class="m-meta m-meta-hall" wx:if="{{item.hall_name}}">
+              <view class="ico ico-pin-lg"></view>
+              <text>{{item.hall_name}}</text>
+            </view>
+            <view class="m-desc" wx:if="{{item.description}}">{{item.description}}</view>
+          </view>
+          <view class="m-actions">
+            <!-- 热门展项 = 特殊展项: 体验预约(付费); catchtap 阻止冒泡, 整卡跳展项列表 -->
+            <block wx:if="{{item.is_special}}">
+              <view class="m-price">¥{{item.priceYuan}}<text class="m-price-unit">/人</text></view>
+              <view class="m-btn m-btn-special" catchtap="goExhibitBooking" data-index="{{index}}">体验预约</view>
+            </block>
+            <view wx:else class="m-btn" catchtap="goBooking">立即预约</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="m-empty">展厅展项筹备中</view>
+  </view>
+
+  <!-- ============ 近期活动 (数据源: GET /announcements, type=activity) ============ -->
+  <view class="m-section">
+    <view class="m-head">
+      <view class="m-title font-trad">近期活动</view>
+    </view>
+
+    <block wx:if="{{activities.length}}">
+      <view class="m-act" wx:for="{{activities}}" wx:key="id">
+        <view class="m-act-thumb">
+          <image wx:if="{{item.img && !item.imgFailed}}" class="m-act-thumb-img" src="{{item.img}}"
+                 mode="aspectFill" lazy-load />
+          <view wx:else class="m-poster-ph">{{item.ph}}</view>
+        </view>
+        <view class="m-act-body">
+          <view class="m-act-name font-trad">{{item.title}}</view>
+          <view class="m-act-time">{{item.content}}</view>
+          <view class="m-tag">免费 · 名额有限</view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="m-empty">暂无近期活动</view>
+  </view>
+
+  <!-- ============ 场馆信息 ============ -->
+  <view class="m-section">
+    <view class="m-head">
+      <view class="m-title font-trad">参观指南</view>
+    </view>
+    <view class="venue-info">
+      <view class="vi-row" wx:if="{{venueOpen}}">
+        <view class="vi-ico ico-clock"></view>
+        <view class="vi-body">
+          <view class="vi-label">开放时间</view>
+          <view class="vi-text">{{venueOpen}}</view>
+        </view>
+      </view>
+      <view class="vi-row" wx:if="{{venueAddr}}">
+        <view class="ico ico-pin"></view>
+        <view class="vi-body">
+          <view class="vi-label">场馆地址</view>
+          <view class="vi-text">{{venueAddr}}</view>
+        </view>
+      </view>
+      <view class="vi-row" wx:if="{{venueNotice}}">
+        <view class="vi-ico ico-notice"></view>
+        <view class="vi-body">
+          <view class="vi-label">入馆须知</view>
+          <view class="vi-text">{{venueNotice}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 收尾标语 ============ -->
+  <view class="slogan">
+    <view class="slogan-line"></view>
+    <text class="slogan-text font-trad">探索科学 · 点亮好奇</text>
+    <view class="slogan-line"></view>
+  </view>
+</view>

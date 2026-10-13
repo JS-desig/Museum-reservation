@@ -1,0 +1,173 @@
+/* 预约 tab — 墨绿体系 #386B56 / 背景 #F6F8F7 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* 底部自定义 tabBar 高 139rpx, 结算栏高约 90rpx, 页面需让出两者 */
+.page {
+  padding: 30rpx 30rpx calc(260rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 场馆信息卡 ---------- */
+.venue-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-radius: 32rpx;
+  background: #ffffff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+.venue-text { display: flex; flex-direction: column; justify-content: center; }
+.venue-name { font-size: 34rpx; font-weight: 700; color: #111827; letter-spacing: 0.5rpx; }
+.venue-slogan { margin-top: 10rpx; font-size: 24rpx; color: #9ca3af; }
+.venue-thumb {
+  width: 184rpx;
+  height: 123rpx;
+  flex-shrink: 0;
+  border-radius: 16rpx;
+  background: #eef2f0;
+}
+.venue-open {
+  margin-top: 10rpx;
+  font-size: 21rpx;
+  color: #417558;
+  line-height: 1.5;
+}
+
+/* 闭馆提示条 */
+.closed-tip {
+  margin-bottom: 20rpx;
+  padding: 18rpx 28rpx;
+  border-radius: 16rpx;
+  background: #fdeeee;
+  border: 1rpx solid rgba(224, 82, 82, 0.25);
+  color: #c0392b;
+  font-size: 25rpx;
+}
+
+/* ---------- 小节 ---------- */
+.sec { margin-top: 30rpx; }
+.sec-title { font-size: 27rpx; font-weight: 600; color: #111827; }
+.sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+}
+/* 右向箭头 (纯 CSS, 免额外图标资源) */
+.chev {
+  width: 14rpx;
+  height: 14rpx;
+  border-right: 3rpx solid #9ca3af;
+  border-bottom: 3rpx solid #9ca3af;
+  transform: rotate(-45deg);
+}
+
+/* ---------- 日期药丸 ---------- */
+.date-grid { display: flex; gap: 15rpx; margin-top: 22rpx; }
+.date-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15rpx 6rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  border: 1rpx solid #f3f4f6;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.03);
+}
+.date-pill.on { background: #386b56; border-color: #386b56; }
+.date-pill.closed { opacity: 0.45; }
+.date-closed { margin-top: 4rpx; font-size: 19rpx; color: #c0392b; }
+.date-pill.on .date-closed { color: rgba(255, 255, 255, 0.85); }
+.date-md { font-size: 24rpx; font-weight: 700; color: #1f2937; }
+.date-pill.on .date-md { color: #ffffff; }
+.date-week { margin-top: 6rpx; font-size: 21rpx; color: #9ca3af; }
+.date-pill.on .date-week { color: rgba(255, 255, 255, 0.9); }
+.date-today { margin-top: 4rpx; font-size: 21rpx; color: rgba(255, 255, 255, 0.9); }
+
+/* ---------- 票种列表 ---------- */
+.ticket-list { display: flex; flex-direction: column; gap: 20rpx; }
+.ticket {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 27rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.03);
+}
+.ticket-info { display: flex; flex-direction: column; min-width: 0; }
+.ticket-name { font-size: 29rpx; font-weight: 700; color: #111827; }
+.ticket-desc { margin-top: 10rpx; font-size: 24rpx; color: #9ca3af; }
+.ticket-right { display: flex; align-items: center; gap: 20rpx; flex-shrink: 0; }
+.ticket-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 21rpx;
+  font-weight: 500;
+  color: #386b56;
+  background: #e8f2ec;
+}
+.free-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 21rpx;
+  font-weight: 500;
+  color: #386b56;
+  background: #e8f2ec;
+}
+.radio {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  border: 2rpx solid #d1d5db;
+  box-sizing: border-box;
+}
+.radio.on {
+  border-color: #386b56;
+  background: #386b56;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 选中态内圈白点 */
+.radio.on::after {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* ---------- 底部结算栏 (上移避开 tabBar) ---------- */
+.paybar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(139rpx + env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23rpx 38rpx;
+  background: #ffffff;
+  border-top: 1rpx solid #f3f4f6;
+}
+.pay-total { display: flex; align-items: baseline; }
+.pay-label { font-size: 27rpx; color: #1f2937; }
+.pay-amount { font-size: 34rpx; font-weight: 700; color: #386b56; line-height: 1; }
+.pay-btn {
+  padding: 19rpx 61rpx;
+  border-radius: 999rpx;
+  background: #386b56;
+  color: #ffffff;
+  font-size: 27rpx;
+  font-weight: 500;
+}
+.pay-btn:active { background: #2f5a48; transform: scale(0.98); }

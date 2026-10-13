@@ -1,0 +1,76 @@
+<!-- 特殊展项预约页 — 付费体验: 日期 + 时段 + 人数 + 模拟支付 -->
+<view class="page">
+  <!-- 展项信息头 -->
+  <view class="head">
+    <view class="head-card">
+      <view class="head-title">{{title}}</view>
+      <view class="head-price">¥{{priceYuan}} / 人 · 付费体验项目</view>
+      <view class="head-tip">需先持有当日入馆预约 · 体验人数不超过入馆预约人数</view>
+    </view>
+  </view>
+
+  <view class="container">
+    <!-- 选择日期 -->
+    <view class="sec">
+      <view class="sec-title">选择体验日期</view>
+      <view class="date-grid">
+        <view
+          class="date-pill {{dateIndex === index ? 'on' : ''}}"
+          wx:for="{{dates}}"
+          wx:key="value"
+          data-index="{{index}}"
+          bindtap="selectDate"
+        >
+          <view class="date-md">{{item.md}}</view>
+          <view class="date-week">{{item.week}}</view>
+          <view class="date-today" wx:if="{{item.today}}">今天</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 选择时段 -->
+    <view class="sec">
+      <view class="sec-title">选择体验时段</view>
+      <view class="session-list" wx:if="{{sessions.length}}">
+        <view
+          class="session {{sessionIndex === index ? 'on' : ''}} {{item.disabled ? 'disabled' : ''}}"
+          wx:for="{{sessions}}"
+          wx:key="session_id"
+          data-index="{{index}}"
+          bindtap="selectSession"
+        >
+          <view class="session-name">{{item.name}} {{item.time}}</view>
+          <view class="session-remaining">{{item.disabled ? '已满' : '余 ' + item.remaining}}</view>
+        </view>
+      </view>
+      <view wx:else class="sec-empty">该日期暂无可约时段</view>
+    </view>
+
+    <!-- 体验人数 -->
+    <view class="sec">
+      <view class="sec-title">体验人数</view>
+      <view class="stepper-row">
+        <view class="stepper-btn" bindtap="onPersonChange" data-delta="-1">−</view>
+        <view class="stepper-num">{{personCount}}</view>
+        <view class="stepper-btn" bindtap="onPersonChange" data-delta="1">＋</view>
+        <text class="stepper-hint">不超过入馆预约人数(最多{{maxPerson}}人)</text>
+      </view>
+    </view>
+
+    <!-- 前置提示 -->
+    <view class="entry-tip {{entryChecked ? 'ok' : ''}}" wx:if="{{sessions.length}}">
+      {{entryChecked ? '✓ 已检测到当日入馆预约, 可直接预约体验' : '尚未检测到当日入馆预约, 请先完成入馆预约'}}
+    </view>
+  </view>
+</view>
+
+<!-- 底部支付栏 -->
+<view class="paybar">
+  <view class="pay-total">
+    <text class="pay-label">合计：</text>
+    <text class="pay-amount">¥ {{totalYuan}}</text>
+  </view>
+  <view class="pay-btn {{submitting ? 'disabled' : ''}}" bindtap="submit">
+    {{submitting ? '提交中…' : '支付并预约'}}
+  </view>
+</view>

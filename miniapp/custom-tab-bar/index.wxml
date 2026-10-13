@@ -1,0 +1,13 @@
+<!-- 自定义底部菜单 (首页/预约/扫码/我的) -->
+<view class="tabbar">
+  <view
+    class="tabbar-item {{selected === index ? 'on' : 'off'}}"
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    data-index="{{index}}"
+    bindtap="onTap"
+  >
+    <view class="tabbar-icon ico-{{item.icon}}-{{selected === index ? 'on' : 'off'}}"></view>
+    <view class="tabbar-label">{{item.text}}</view>
+  </view>
+</view>

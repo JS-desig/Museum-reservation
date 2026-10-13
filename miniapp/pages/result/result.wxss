@@ -1,0 +1,176 @@
+/* 预约码页 — 墨绿体系 #386B56, 与 tab 页统一 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #2a5241 0%, #386b56 220rpx, #f6f8f7 220rpx, #f6f8f7 100%);
+  padding-bottom: 60rpx;
+}
+
+.code-card {
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 48rpx 40rpx;
+  text-align: center;
+  margin: 32rpx 24rpx 0;
+  box-shadow: 0 10rpx 36rpx rgba(42, 82, 65, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 装饰性二维码 */
+.qr-wrap {
+  position: relative;
+  width: 340rpx;
+  height: 340rpx;
+  margin: 0 auto 10rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  border: 4rpx solid #386b56;
+  border-radius: 16rpx;
+}
+.qr-grid { display: flex; flex-wrap: wrap; width: 100%; height: 100%; }
+.qr-cell { width: 4%; height: 4%; }
+.qr-0 { background: transparent; }
+.qr-1 { background: #386b56; }
+.qr-2 { background: #386b56; }
+.qr-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72rpx;
+  height: 72rpx;
+  background: #386b56;
+  color: #fff;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 28rpx;
+  letter-spacing: 1rpx;
+  border: 6rpx solid #fff;
+  box-sizing: content-box;
+}
+
+/* 非待使用: 二维码置灰 */
+.qr-wrap.used .qr-1, .qr-wrap.used .qr-2 { background: #c8ccc9; }
+.qr-wrap.used .qr-core { background: #c8ccc9; }
+
+/* 状态水印 */
+.wm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  font-size: 60rpx;
+  font-weight: 700;
+  color: rgba(56, 107, 86, 0.55);
+  letter-spacing: 8rpx;
+  border: 6rpx solid rgba(56, 107, 86, 0.55);
+  padding: 8rpx 28rpx;
+  border-radius: 12rpx;
+  pointer-events: none;
+}
+
+.resv-code {
+  font-size: 52rpx;
+  font-weight: 700;
+  letter-spacing: 8rpx;
+  margin: 24rpx 0 8rpx;
+  font-family: 'SF Mono', Menlo, monospace;
+  color: #2a5241;
+}
+/* 复制按钮 */
+.copy-btn {
+  display: inline-block;
+  padding: 6rpx 26rpx;
+  border-radius: 999rpx;
+  background: #e8f2ec;
+  color: #386b56;
+  font-size: 23rpx;
+  font-weight: 500;
+}
+.copy-btn:active { background: #d7e7de; }
+
+.resv-session { font-size: 30rpx; font-weight: 700; color: #1f2937; margin-top: 24rpx; }
+.resv-info { color: #6b7280; font-size: 26rpx; margin-top: 8rpx; }
+
+.status-tag {
+  display: inline-block;
+  padding: 8rpx 28rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  margin-top: 18rpx;
+}
+.status-booked { background: #e8f2ec; color: #386b56; }
+.status-checked_in { background: #e9f8ef; color: #22a05a; }
+.status-cancelled { background: #f4f4f5; color: #909399; }
+.status-no_show { background: #fdeeee; color: #e05252; }
+.status-expired { background: #fdf1e3; color: #b26a00; }
+
+.qr-tip {
+  color: #9ca3af;
+  font-size: 24rpx;
+  margin-top: 28rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx dashed #e6eaf0;
+}
+
+/* 入馆人员明细 */
+.visitors-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 16rpx 28rpx;
+  margin: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.section-title { font-size: 29rpx; font-weight: 700; color: #1f2937; padding: 20rpx 0; }
+.visitor-row {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f0f2f6;
+  font-size: 26rpx;
+}
+.visitor-row:last-child { border-bottom: none; }
+.visitor-name { font-weight: 600; color: #2c3345; width: 160rpx; }
+.visitor-card-no { flex: 1; color: #9ca3af; font-size: 24rpx; }
+.visitor-state { color: #9ca3af; font-size: 23rpx; }
+.visitor-state.in { color: #22a05a; font-weight: 600; }
+
+/* 底部操作 */
+.ops { display: flex; gap: 24rpx; margin: 8rpx 24rpx 0; }
+.cancel-btn {
+  flex: 1;
+  background: #fff !important;
+  color: #e05252 !important;
+  border: 2rpx solid #e05252 !important;
+  border-radius: 44rpx;
+  font-weight: 600;
+}
+.cancel-btn::after { border: none; }
+.home-btn {
+  flex: 1;
+  background: #386b56 !important;
+  color: #fff !important;
+  border-radius: 44rpx;
+  font-weight: 600;
+}
+.home-btn::after { border: none; }
+
+/* 加载失败 */
+.empty {
+  padding: 200rpx 60rpx;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 27rpx;
+  line-height: 1.8;
+}

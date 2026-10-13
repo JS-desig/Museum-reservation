@@ -1,0 +1,82 @@
+name: heze-museum-ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup MySQL
+        run: |
+          sudo systemctl start mysql
+          mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS heze_museum DEFAULT CHARACTER SET utf8mb4;"
+          mysql -uroot -proot heze_museum < sql/schema.sql
+
+      - name: Install deps
+        run: pip install -r backend/requirements.txt
+
+      - name: Seed data
+        working-directory: backend
+        env:
+          DB_PASSWORD: root
+        run: python seed.py
+
+      - name: Start API server
+        working-directory: backend
+        env:
+          DB_PASSWORD: root
+        run: |
+          nohup python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 &
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:8000/api/health && break
+            sleep 1
+          done
+
+      - name: Run API tests (Allure)
+        working-directory: backend
+        env:
+          DB_PASSWORD: root
+        run: python -m pytest tests/ -v --tb=short --alluredir=allure-results
+
+      - name: SQL consistency check
+        working-directory: backend
+        env:
+          DB_PASSWORD: root
+        run: python tests/sql_consistency.py
+
+      - name: Go-live smoke (11 core links)
+        working-directory: backend
+        env:
+          DB_PASSWORD: root
+        run: python tests/smoke_test.py
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: backend/allure-results/
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install & Build
+        working-directory: frontend
+        run: |
+          npm install
+          npm run build

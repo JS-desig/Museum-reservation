@@ -1,0 +1,70 @@
+<!-- 预约 tab — 免费预约制; 场馆卡 + 日期 + 预约通道 -->
+<view class="page">
+  <!-- 闭馆提示 -->
+  <view class="closed-tip" wx:if="{{venueClosed}}">场馆今日闭馆, 暂停预约</view>
+
+  <!-- 场馆信息卡 -->
+  <view class="venue-card">
+    <view class="venue-text">
+      <view class="venue-name">{{venueName}}</view>
+      <view class="venue-slogan">{{venueSlogan}}</view>
+      <view class="venue-open" wx:if="{{venueOpen}}">{{venueOpen}}</view>
+    </view>
+    <!-- 场馆建筑插画 (后端 /static/exhibits/venue.svg) -->
+    <image class="venue-thumb" src="{{venueImg}}" mode="aspectFill" />
+  </view>
+
+  <!-- 选择参观日期 -->
+  <view class="sec">
+    <view class="sec-title">选择参观日期</view>
+    <view class="date-grid">
+      <view
+        class="date-pill {{dateIndex === index ? 'on' : ''}} {{item.closed ? 'closed' : ''}}"
+        wx:for="{{dates}}"
+        wx:key="value"
+        data-index="{{index}}"
+        bindtap="selectDate"
+      >
+        <view class="date-md">{{item.md}}</view>
+        <view class="date-week">{{item.week}}</view>
+        <view class="date-today" wx:if="{{item.today}}">今天</view>
+        <view class="date-closed" wx:if="{{item.closed}}">闭馆</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择预约通道 -->
+  <view class="sec">
+    <view class="sec-head">
+      <view class="sec-title">选择预约通道</view>
+      <view class="free-tag">免费不免票</view>
+    </view>
+    <view class="ticket-list">
+      <view
+        class="ticket {{ticketIndex === index ? 'on' : ''}}"
+        wx:for="{{tickets}}"
+        wx:key="id"
+        data-index="{{index}}"
+        bindtap="selectTicket"
+      >
+        <view class="ticket-info">
+          <view class="ticket-name">{{item.name}}</view>
+          <view class="ticket-desc">{{item.desc}}</view>
+        </view>
+        <view class="ticket-right">
+          <view class="ticket-tag">{{item.tag}}</view>
+          <view class="radio {{ticketIndex === index ? 'on' : ''}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部固定结算栏 (位于自定义 tabBar 之上) -->
+<view class="paybar">
+  <view class="pay-total">
+    <text class="pay-label">预约费用：</text>
+    <text class="pay-amount">免费</text>
+  </view>
+  <view class="pay-btn" bindtap="next">选择时段</view>
+</view>

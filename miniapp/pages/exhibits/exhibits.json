@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "展厅展项",
+  "navigationBarBackgroundColor": "#F6F8F7",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F6F8F7",
+  "backgroundTextStyle": "dark"
+}

@@ -1,0 +1,62 @@
+/* ============ 小程序全局设计体系 ============ */
+page {
+  background: #f2f4f8;
+  font-size: 28rpx;
+  color: #2c3345;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.container { padding: 24rpx; }
+
+/* 卡片体系 */
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(29, 63, 114, 0.06);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+/* 标题左侧装饰条 */
+.section-title::before {
+  content: '';
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(180deg, #2b5aa0, #1d3f72);
+}
+
+/* 品牌色按钮 */
+.btn-book {
+  margin-top: 28rpx;
+  background: linear-gradient(90deg, #2b5aa0, #1d3f72) !important;
+  color: #fff !important;
+  border-radius: 44rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  border: none;
+  box-shadow: 0 8rpx 20rpx rgba(29, 63, 114, 0.28);
+}
+.btn-book::after { border: none; }
+
+/* 空态 */
+.empty {
+  text-align: center;
+  color: #9aa3b2;
+  padding: 100rpx 0;
+  font-size: 26rpx;
+}
+
+/* 状态徽标通用色 */
+.c-primary { color: #2b5aa0; }
+.c-success { color: #22a05a; }
+.c-danger { color: #e05252; }
+.c-muted { color: #6b7280; }

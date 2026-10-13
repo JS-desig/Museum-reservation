@@ -1,0 +1,112 @@
+/* 预约填单页 — 墨绿体系 #386B56 / 背景 #F6F8F7 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.page { min-height: 100vh; padding-bottom: 60rpx; }
+
+/* 顶部时段信息头 */
+.head {
+  background: linear-gradient(135deg, #2a5241 0%, #386b56 55%, #4d7e68 100%);
+  padding: 36rpx 32rpx 60rpx;
+  border-radius: 0 0 32rpx 32rpx;
+}
+.head-card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+  border-radius: 20rpx;
+  padding: 30rpx 32rpx;
+  color: #fff;
+}
+.head-session { font-size: 38rpx; font-weight: 700; letter-spacing: 2rpx; }
+.head-date { font-size: 27rpx; opacity: 0.85; margin-top: 8rpx; }
+.head-tip { font-size: 23rpx; opacity: 0.78; margin-top: 18rpx; padding-top: 18rpx; border-top: 1rpx dashed rgba(255,255,255,0.25); }
+
+.container { margin-top: -28rpx; padding: 0 24rpx; }
+
+.visitor-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 16rpx 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f2f6;
+}
+.form-item:last-child { border-bottom: none; }
+.form-label { width: 170rpx; color: #6b7280; font-size: 26rpx; flex-shrink: 0; }
+.form-input { flex: 1; font-size: 28rpx; color: #2c3345; }
+.form-input.disabled { color: #9ca3af; }
+.ph { color: #b9c0cc; }
+.form-err { margin-top: -8rpx; padding-bottom: 14rpx; font-size: 22rpx; color: #e05252; }
+
+.section-title { font-size: 29rpx; font-weight: 700; color: #1f2937; padding: 20rpx 0 8rpx; }
+
+.visitor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.visitor-header .section-title { flex: 1; }
+.remove-btn {
+  color: #e05252;
+  font-size: 25rpx;
+  padding: 6rpx 18rpx;
+  background: #fdeeee;
+  border-radius: 999rpx;
+}
+.add-btn {
+  background: #fff;
+  color: #386b56;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  font-weight: 600;
+  border: 2rpx dashed #a8c3b8;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.add-btn:active { background: #eef4f1; }
+
+/* 人数汇总条 */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  background: #e8f2ec;
+  border-radius: 16rpx;
+  margin-bottom: 28rpx;
+  color: #2a5241;
+  font-size: 27rpx;
+}
+.summary-num { font-size: 34rpx; font-weight: 700; color: #386b56; margin: 0 4rpx; }
+.summary-hint { color: #386b56; font-size: 24rpx; font-weight: 600; opacity: 0.75; }
+
+.submit-btn {
+  background: #386b56 !important;
+  color: #fff !important;
+  border-radius: 44rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  border: none !important;
+  box-shadow: 0 8rpx 20rpx rgba(56, 107, 86, 0.28);
+}
+.submit-btn::after { border: none; }
+.submit-btn[disabled] { background: #a8c3b8 !important; color: #fff !important; }
+
+/* 防刷提示 */
+.rule-tip {
+  color: #9ca3af;
+  font-size: 23rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 1.6;
+}

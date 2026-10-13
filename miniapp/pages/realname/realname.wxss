@@ -1,0 +1,102 @@
+/* 实名认证页 — 墨绿体系 #386B56 / 背景 #F6F8F7 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.page { min-height: 100vh; padding-bottom: 60rpx; }
+
+/* 顶部说明头 */
+.head {
+  background: linear-gradient(135deg, #2a5241 0%, #386b56 55%, #4d7e68 100%);
+  padding: 36rpx 32rpx 60rpx;
+  border-radius: 0 0 32rpx 32rpx;
+}
+.head-card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+  border-radius: 20rpx;
+  padding: 30rpx 32rpx;
+  color: #fff;
+}
+.head-title { font-size: 36rpx; font-weight: 700; letter-spacing: 2rpx; }
+.head-sub { font-size: 24rpx; opacity: 0.85; margin-top: 10rpx; line-height: 1.6; }
+
+.container { margin-top: -28rpx; padding: 0 24rpx; }
+
+/* 状态徽章 */
+.state-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 6rpx 22rpx;
+  border-radius: 999rpx;
+  font-size: 23rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+.state-ok { background: #e8f2ec; color: #386b56; }
+.state-todo { background: #fdf1e3; color: #b26a00; }
+
+.form-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 16rpx 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #f0f2f6;
+}
+.form-item:last-child { border-bottom: none; }
+.form-label { width: 170rpx; color: #6b7280; font-size: 26rpx; flex-shrink: 0; }
+.form-input { flex: 1; font-size: 28rpx; color: #2c3345; }
+.form-input.disabled { color: #9ca3af; }
+.ph { color: #b9c0cc; }
+/* 校验失败: 输入框行红字提示 */
+.form-err {
+  margin-top: -6rpx;
+  padding-bottom: 14rpx;
+  font-size: 22rpx;
+  color: #e05252;
+}
+/* 已绑定脱敏回显 */
+.form-plain { flex: 1; font-size: 28rpx; color: #2c3345; letter-spacing: 1rpx; }
+
+.tip {
+  color: #9ca3af;
+  font-size: 24rpx;
+  padding: 24rpx 8rpx 0;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+}
+
+.submit-btn {
+  margin: 44rpx 24rpx 0;
+  background: #386b56 !important;
+  color: #fff !important;
+  border-radius: 44rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  border: none;
+  box-shadow: 0 8rpx 20rpx rgba(56, 107, 86, 0.28);
+}
+.submit-btn::after { border: none; }
+.submit-btn[disabled] { background: #a8c3b8 !important; color: #fff !important; }
+
+/* 重新绑定: 次按钮描边 */
+.rebind-btn {
+  margin: 24rpx 24rpx 0;
+  background: #fff !important;
+  color: #386b56 !important;
+  border: 2rpx solid #386b56 !important;
+  border-radius: 44rpx;
+  font-weight: 500;
+}
+.rebind-btn::after { border: none; }

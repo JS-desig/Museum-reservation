@@ -1,0 +1,63 @@
+<!-- 预约填单页 — 墨绿体系; 实名带入 + 同行人 + 防刷提示 -->
+<view class="page">
+  <!-- 时段信息头 -->
+  <view class="head">
+    <view class="head-card">
+      <view class="head-session">{{sessionName}}</view>
+      <view class="head-date">{{date}}</view>
+      <view class="head-tip">免费不免票 · 入馆出示预约码核销</view>
+    </view>
+  </view>
+
+  <view class="container">
+    <!-- 主预约人 -->
+    <view class="visitor-card">
+      <view class="section-title">主预约人</view>
+      <view class="form-item">
+        <text class="form-label">姓名</text>
+        <input class="form-input disabled" value="{{mainVisitor.real_name}}" disabled />
+      </view>
+      <view class="form-item">
+        <text class="form-label">身份证号</text>
+        <input class="form-input disabled" value="{{mainVisitor.id_card_no}}" disabled placeholder="实名后自动带入" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">手机号</text>
+        <input class="form-input" value="{{mainVisitor.phone}}" bindinput="onMainPhone"
+               placeholder="11位手机号" type="number" maxlength="11" />
+      </view>
+      <view class="form-err" wx:if="{{errors.mainPhone}}">{{errors.mainPhone}}</view>
+    </view>
+
+    <!-- 同行人 -->
+    <view class="visitor-card" wx:for="{{visitors}}" wx:key="index">
+      <view class="visitor-header">
+        <view class="section-title">同行人 {{index + 1}}</view>
+        <text class="remove-btn" bindtap="removeVisitor" data-index="{{index}}">移除</text>
+      </view>
+      <view class="form-item">
+        <text class="form-label">姓名</text>
+        <input class="form-input" value="{{item.real_name}}" bindinput="onVisitorName" data-index="{{index}}" placeholder="同行人姓名" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">身份证号</text>
+        <input class="form-input" value="{{item.id_card_no}}" bindinput="onVisitorCard" data-index="{{index}}" placeholder="18位身份证号" maxlength="18" />
+      </view>
+      <view class="form-err" wx:if="{{errors.visitors[index]}}">{{errors.visitors[index]}}</view>
+    </view>
+
+    <view class="add-btn" bindtap="addVisitor" wx:if="{{visitors.length < maxVisitors - 1}}">＋ 添加同行人（最多{{maxVisitors}}人）</view>
+
+    <!-- 人数汇总 -->
+    <view class="summary">
+      <text>共 <text class="summary-num">{{visitors.length + 1}}</text> 人</text>
+      <text class="summary-hint">免票入场</text>
+    </view>
+
+    <button class="submit-btn" bindtap="submit" loading="{{submitting}}" disabled="{{submitting}}">
+      {{submitting ? '提交中…' : '提交预约'}}
+    </button>
+
+    <view class="rule-tip">同证件同日限约 3 次 · 同日同时段限约 1 次 · 时段开始前 30 分钟可取消</view>
+  </view>
+</view>

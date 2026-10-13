@@ -1,0 +1,147 @@
+/* 特殊展项预约页 — 墨绿体系 + 金色付费元素 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.page { min-height: 100vh; padding-bottom: calc(200rpx + env(safe-area-inset-bottom)); }
+
+/* ---------- 头部 ---------- */
+.head {
+  background: linear-gradient(135deg, #2a5241 0%, #386b56 55%, #4d7e68 100%);
+  padding: 36rpx 32rpx 60rpx;
+  border-radius: 0 0 32rpx 32rpx;
+}
+.head-card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+  border-radius: 20rpx;
+  padding: 30rpx 32rpx;
+  color: #fff;
+}
+.head-title { font-size: 36rpx; font-weight: 700; letter-spacing: 1rpx; }
+.head-price {
+  display: inline-block;
+  margin-top: 14rpx;
+  padding: 4rpx 18rpx;
+  border-radius: 8rpx;
+  background: rgba(214, 158, 46, 0.9);
+  font-size: 25rpx;
+  font-weight: 600;
+}
+.head-tip { font-size: 22rpx; opacity: 0.8; margin-top: 16rpx; line-height: 1.6; }
+
+.container { margin-top: -28rpx; padding: 0 24rpx; }
+
+/* ---------- 小节 ---------- */
+.sec {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(40, 74, 58, 0.05);
+}
+.sec-title { font-size: 28rpx; font-weight: 700; color: #111827; margin-bottom: 20rpx; }
+.sec-empty { font-size: 24rpx; color: #9ca3af; padding: 20rpx 0; text-align: center; }
+
+/* ---------- 日期 (复用 tickets 药丸体系) ---------- */
+.date-grid { display: flex; gap: 15rpx; }
+.date-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15rpx 6rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  border: 1rpx solid #f3f4f6;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.03);
+}
+.date-pill.on { background: #386b56; border-color: #386b56; }
+.date-md { font-size: 24rpx; font-weight: 700; color: #1f2937; }
+.date-pill.on .date-md { color: #ffffff; }
+.date-week { margin-top: 6rpx; font-size: 21rpx; color: #9ca3af; }
+.date-pill.on .date-week { color: rgba(255, 255, 255, 0.9); }
+.date-today { margin-top: 4rpx; font-size: 19rpx; color: rgba(255, 255, 255, 0.85); }
+
+/* ---------- 时段卡片 ---------- */
+.session-list { display: flex; flex-direction: column; gap: 18rpx; }
+.session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 28rpx;
+  border-radius: 18rpx;
+  background: #f8faf9;
+  border: 2rpx solid transparent;
+}
+.session.on { border-color: #386b56; background: #eef5f0; }
+.session.disabled { opacity: 0.5; }
+.session-name { font-size: 27rpx; font-weight: 600; color: #1f2937; }
+.session.on .session-name { color: #2a5241; }
+.session-remaining { font-size: 22rpx; color: #9ca3af; }
+.session.on .session-remaining { color: #386b56; font-weight: 600; }
+
+/* ---------- 人数步进器 ---------- */
+.stepper-row { display: flex; align-items: center; gap: 26rpx; }
+.stepper-btn {
+  width: 62rpx;
+  height: 62rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef5f0;
+  color: #386b56;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.stepper-btn:active { background: #dcebe2; }
+.stepper-num { min-width: 70rpx; text-align: center; font-size: 34rpx; font-weight: 700; color: #1f2937; }
+.stepper-hint { font-size: 21rpx; color: #9ca3af; }
+
+/* ---------- 前置条件提示 ---------- */
+.entry-tip {
+  padding: 20rpx 28rpx;
+  border-radius: 16rpx;
+  background: #fdf1e3;
+  border: 1rpx solid rgba(178, 106, 0, 0.2);
+  color: #b26a00;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+.entry-tip.ok {
+  background: #e8f2ec;
+  border-color: rgba(56, 107, 86, 0.2);
+  color: #2a5241;
+}
+
+/* ---------- 底部支付栏 ---------- */
+.paybar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23rpx 38rpx calc(23rpx + env(safe-area-inset-bottom));
+  background: #ffffff;
+  border-top: 1rpx solid #f3f4f6;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.pay-total { display: flex; align-items: baseline; }
+.pay-label { font-size: 26rpx; color: #1f2937; }
+.pay-amount { font-size: 38rpx; font-weight: 700; color: #b26a00; line-height: 1; }
+.pay-btn {
+  padding: 20rpx 56rpx;
+  border-radius: 999rpx;
+  background: #386b56;
+  color: #ffffff;
+  font-size: 27rpx;
+  font-weight: 600;
+}
+.pay-btn:active { background: #2f5a48; transform: scale(0.98); }
+.pay-btn.disabled { opacity: 0.6; }

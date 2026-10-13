@@ -1,0 +1,176 @@
+/* 扫码 tab (我的预约/凭证) — 墨绿体系 #386B56 / 背景 #F6F8F7 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* 底部让出自定义 tabBar (139rpx) */
+.page {
+  position: relative;
+  padding: 0 30rpx calc(180rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 分类筛选 ---------- */
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+  background: #f6f8f7;
+}
+.filter-item {
+  position: relative;
+  padding: 8rpx 0 19rpx;
+  font-size: 27rpx;
+  color: #9ca3af;
+}
+.filter-item.on { color: #111827; font-weight: 700; }
+.filter-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 30rpx;
+  height: 5rpx;
+  border-radius: 3rpx;
+  background: #386b56;
+}
+
+/* ---------- 凭证卡片 ---------- */
+.list { padding-top: 27rpx; }
+.card {
+  margin-bottom: 23rpx;
+  padding: 30rpx;
+  border-radius: 32rpx;
+  background: #ffffff;
+  border: 1rpx solid rgba(243, 244, 246, 0.7);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 27rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+.head-left { display: flex; align-items: center; min-width: 0; }
+.thumb-img {
+  width: 92rpx;
+  height: 92rpx;
+  flex-shrink: 0;
+  margin-right: 23rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+  background: #2e4a42;
+}
+.head-info { display: flex; flex-direction: column; min-width: 0; }
+.head-name { font-size: 27rpx; font-weight: 600; color: #111827; line-height: 1.3; }
+.head-type { margin-top: 8rpx; font-size: 24rpx; color: #6b7280; }
+.head-time { margin-top: 4rpx; font-size: 21rpx; color: #9ca3af; }
+.head-code { margin-top: 4rpx; font-size: 19rpx; color: #9ca3af; letter-spacing: 1rpx; }
+
+/* 状态徽章 */
+.badge {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 4rpx 15rpx;
+  border-radius: 999rpx;
+  font-size: 21rpx;
+  font-weight: 500;
+  background: #eaf5f0;
+  color: #386b56;
+  border: 1rpx solid rgba(56, 107, 86, 0.1);
+}
+.badge-checked_in { background: #eef1f6; color: #6b7280; border-color: rgba(107, 114, 128, 0.12); }
+.badge-cancelled,
+.badge-no_show { background: #f5f5f5; color: #9ca3af; border-color: rgba(156, 163, 175, 0.15); }
+
+/* ---------- 二维码区 ---------- */
+.qr-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 46rpx 0 30rpx;
+}
+.qr-box {
+  width: 338rpx;
+  height: 338rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+  border-radius: 24rpx;
+  background: #ffffff;
+  border: 1rpx solid #f3f4f6;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qr-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 308rpx;
+  height: 308rpx;
+}
+.qr-cell { width: 4%; height: 4%; background: transparent; }
+.qr-1, .qr-2 { background: #1a1a1a; }
+
+.qr-title { margin-top: 27rpx; font-size: 27rpx; font-weight: 600; color: #1f2937; }
+.qr-tip { margin-top: 8rpx; font-size: 21rpx; color: #9ca3af; }
+
+/* ---------- 操作按钮 ---------- */
+.ops { display: flex; gap: 23rpx; padding-top: 23rpx; }
+.op {
+  flex: 1;
+  padding: 15rpx 23rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+/* 重置小程序 button 默认样式/边框 */
+.op::after { border: none; }
+.op:active { background: #f9fafb; transform: scale(0.98); }
+.op-disabled { color: #c7cbd1; border-color: #eceef0; }
+
+/* ---------- 空态 ---------- */
+.empty {
+  padding: 100rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #9ca3af;
+}
+.empty-ico { font-size: 72rpx; margin-bottom: 20rpx; }
+.empty-sub { margin-top: 10rpx; font-size: 23rpx; color: #c0c6c3; }
+.empty-btn {
+  display: inline-block;
+  margin-top: 30rpx;
+  padding: 14rpx 50rpx;
+  border-radius: 999rpx;
+  background: #386b56;
+  color: #ffffff;
+  font-size: 25rpx;
+  font-weight: 500;
+}
+.empty-btn:active { background: #2f5a48; transform: scale(0.98); }
+
+/* ---------- 底部水墨远山 ---------- */
+.ink {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300rpx;
+  opacity: 0.45;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjIwMCIgeDI9IjIwMCIgeTE9IjUwIiB5Mj0iMzAwIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzQxNzU1OCIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGNUY4RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHBhdGggZD0iTS0yMCAxODBDNDAgMTQwIDkwIDE3MCAxNDAgMTMwQzE5MCA5MCAyNDAgMTQ1IDI5MCAxMDBDMzQwIDU1IDM4MCA5MCA0MzAgNzBWMzAwSC0yMFYxODBaIiBmaWxsPSJ1cmwoI2cpIiBmaWxsLW9wYWNpdHk9IjAuMyIvPgo8ZyBzdHJva2U9IiM0MTc1NTgiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjEuMiIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjkwIiBjeT0iMTIwIiByPSIzNCIvPgo8Y2lyY2xlIGN4PSIzMjAiIGN5PSIyMDAiIHI9IjI2Ii8+CjxlbGxpcHNlIGN4PSIzMjAiIGN5PSIyMDAiIHJ4PSI0NCIgcnk9IjEyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTYgMzIwIDIwMCkiLz4KPC9nPgo8L3N2Zz4=");
+}

@@ -1,0 +1,65 @@
+/* 通行记录页 — 墨绿体系 #386B56 / 背景 #F6F8F7 */
+
+page {
+  background: #f6f8f7;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.page { min-height: 100vh; padding: 24rpx 30rpx 60rpx; box-sizing: border-box; }
+
+.list {
+  border-radius: 32rpx;
+  background: #ffffff;
+  border: 1rpx solid #f0f2f0;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+.row {
+  display: flex;
+  align-items: center;
+  padding: 27rpx 30rpx;
+}
+.row + .row { border-top: 1rpx solid #f0f2f0; }
+.row:active { background: #fafafa; }
+
+/* 入/出馆方向图标 */
+.dir-ico {
+  width: 76rpx;
+  height: 76rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+.dir-in { background: #e8f2ec; }
+.dir-out { background: #e8eef8; }
+.dir-arrow {
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 4rpx solid #386b56;
+  border-right: 4rpx solid #386b56;
+}
+.dir-in .dir-arrow { transform: rotate(-45deg); }   /* 箭头向内(左) */
+.dir-out .dir-arrow { transform: rotate(45deg); border-color: #2b5aa0; }  /* 箭头向外(右) */
+
+.row-body { flex: 1; min-width: 0; }
+.row-title { font-size: 28rpx; font-weight: 600; color: #1f2937; }
+.row-title.in-text { color: #386b56; }
+.row-sub { margin-top: 6rpx; font-size: 23rpx; color: #9ca3af; }
+.row-gate { flex-shrink: 0; font-size: 23rpx; color: #6b7280; }
+
+.empty {
+  padding: 160rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #9ca3af;
+}
+.loading {
+  padding: 80rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #9ca3af;
+}

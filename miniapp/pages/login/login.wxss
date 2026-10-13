@@ -1,0 +1,101 @@
+/* 登录页 — 墨绿体系 #386B56 / 米白, 与四个 tab 页统一 */
+.login-wrap {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #2a5241 0%, #386b56 55%, #4d7e68 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 柔光装饰 */
+.login-wrap::before {
+  content: '';
+  position: absolute;
+  width: 560rpx; height: 560rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  filter: blur(90rpx);
+  top: -160rpx;
+  right: -120rpx;
+}
+.login-wrap::after {
+  content: '';
+  position: absolute;
+  width: 460rpx; height: 460rpx;
+  border-radius: 50%;
+  background: rgba(210, 180, 76, 0.10);
+  filter: blur(100rpx);
+  bottom: -140rpx;
+  left: -100rpx;
+}
+
+/* 水墨远山底纹 */
+.ink {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 420rpx;
+  opacity: 0.25;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMjAwIiB4Mj0iMjAwIiB5MT0iNTAiIHkyPSIzMDAiPjxzdG9wIHN0b3AtY29sb3I9IiNGQUY5RjUiIHN0b3Atb3BhY2l0eT0iMC41Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkFGOUY1IiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNLTIwIDE4MEM0MCAxNDAgOTAgMTcwIDE0MCAxMzBDMTkwIDkwIDI0MCAxNDUgMjkwIDEwMEMzNDAgNTUgMzgwIDkwIDQzMCA3MFYzMDBILTIwVjE4MFoiIGZpbGw9InVybCgjZykiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PHBhdGggZD0iTS01MCAyMjBDMjAgMTgwIDgwIDIxMCAxNjAgMTc1QzI0MCAxNDAgMjgwIDE5MCAzNTAgMTUwQzQyMCAxMTAgNDUwIDE0MCA0ODAgMTMwVjMwMEgtNTBWMjIwWiIgZmlsbD0iI0ZBRjlGNSIgZmlsbC1vcGFjaXR5PSIwLjA2Ii8+PC9zdmc+");
+}
+
+.logo-mark {
+  font-size: 84rpx;
+  width: 150rpx; height: 150rpx;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 38rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 12rpx 40rpx rgba(16, 44, 33, 0.3);
+  position: relative;
+  z-index: 1;
+}
+.font-trad {
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'Source Han Serif CN', 'SimSun', serif;
+}
+.logo-title {
+  color: #faf9f5;
+  font-size: 46rpx;
+  font-weight: 700;
+  margin-bottom: 18rpx;
+  letter-spacing: 3rpx;
+  position: relative;
+  z-index: 1;
+}
+.logo-sub {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 25rpx;
+  margin-bottom: 100rpx;
+  letter-spacing: 2rpx;
+  position: relative;
+  z-index: 1;
+}
+.enter-btn {
+  width: 420rpx !important;
+  background: #faf9f5 !important;
+  color: #386b56 !important;
+  border-radius: 44rpx !important;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  box-shadow: 0 12rpx 32rpx rgba(16, 44, 33, 0.35);
+  position: relative;
+  z-index: 1;
+}
+.enter-btn::after { border: none; }
+
+/* 水印式底部说明 */
+.foot {
+  position: absolute;
+  bottom: calc(60rpx + env(safe-area-inset-bottom));
+  left: 0; right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+  z-index: 1;
+}

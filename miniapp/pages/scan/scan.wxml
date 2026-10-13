@@ -1,0 +1,71 @@
+<!-- 扫码 tab — 我的预约凭证列表 -->
+<view class="page">
+  <!-- 分类筛选 -->
+  <view class="filter">
+    <view
+      class="filter-item {{tab === item.key ? 'on' : ''}}"
+      wx:for="{{filters}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="switchTab"
+    >
+      <text>{{item.text}}</text>
+      <view class="filter-bar" wx:if="{{tab === item.key}}"></view>
+    </view>
+  </view>
+
+  <!-- 凭证卡片列表 -->
+  <view class="list">
+    <view class="card" wx:for="{{list}}" wx:key="id">
+      <!-- 卡片头部 (点击切换展开) -->
+      <view class="card-head" data-id="{{item.id}}" bindtap="toggle">
+        <view class="head-left">
+          <!-- 场馆缩略图 -->
+          <image class="thumb-img" src="{{venueImg}}" mode="aspectFill" />
+          <view class="head-info">
+            <view class="head-name">{{type === 'exhibit' ? item.exhibit_title : venueName}}</view>
+            <view class="head-type">{{item.headType}}</view>
+            <view class="head-time">{{item.visit_date}} {{item.session_time}}</view>
+            <view class="head-code" bindtap="goDetail" data-code="{{item.resv_code}}">详情 · {{item.resv_code}}</view>
+          </view>
+        </view>
+        <view class="badge badge-{{item.status}}">{{item.statusText}}</view>
+      </view>
+
+      <!-- 二维码 (仅展开项渲染, 每张 625 格) -->
+      <block wx:if="{{item.id === activeId}}">
+        <view class="qr-area">
+          <view class="qr-box">
+            <view class="qr-grid">
+              <view wx:for="{{qrCells}}" wx:key="i" class="qr-cell qr-{{item.v}}"></view>
+            </view>
+          </view>
+          <view class="qr-title">入馆二维码</view>
+          <view class="qr-tip">有效期：{{item.visit_date}} {{item.session_time}}</view>
+        </view>
+
+        <view class="ops">
+          <button class="op" open-type="share">分享凭证</button>
+          <view
+            wx:if="{{item.status === 'booked'}}"
+            class="op"
+            data-id="{{item.id}}"
+            catchtap="cancel"
+          >取消预约</view>
+          <view wx:else class="op op-disabled">取消预约</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view class="empty" wx:if="{{!loading && !list.length}}">
+    <view class="empty-ico">{{type === 'exhibit' ? '🧪' : '🎫'}}</view>
+    <view>{{type === 'exhibit' ? '暂无展项体验预约' : (tab === 'booked' ? '暂无待使用的预约' : '暂无预约记录')}}</view>
+    <view class="empty-sub">{{type === 'exhibit' ? '需先预约入馆, 再预约特殊展项体验' : '完成实名认证后即可预约参观'}}</view>
+    <view class="empty-btn" bindtap="goBooking">{{type === 'exhibit' ? '浏览展项' : '去预约'}}</view>
+  </view>
+
+  <!-- 底部水墨远山装饰 -->
+  <view class="ink"></view>
+</view>

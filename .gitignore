@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# 测试产物
+backend/allure-results/
+allure-report/
+test-results/
+
+# 前端
+frontend/node_modules/
+frontend/dist/
+*.local
+
+# 小程序
+miniapp/node_modules/
+
+# IDE / 系统
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log

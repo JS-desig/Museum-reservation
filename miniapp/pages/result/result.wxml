@@ -1,0 +1,42 @@
+<!-- 预约码页 — 墨绿体系; 二维码 + 复制预约码 + 状态水印 + 取消 -->
+<view class="page">
+  <view class="code-card" wx:if="{{resv}}">
+    <view class="qr-wrap {{resv.status !== 'booked' ? 'used' : ''}}">
+      <view class="qr-grid">
+        <view wx:for="{{qrCells}}" wx:key="i" class="qr-cell qr-{{item.v}}"></view>
+      </view>
+      <view class="qr-core">HZ</view>
+      <view class="wm" wx:if="{{resv.status === 'checked_in'}}">已核销</view>
+      <view class="wm" wx:elif="{{resv.status === 'cancelled'}}">已取消</view>
+      <view class="wm" wx:elif="{{resv.status === 'no_show'}}">已爽约</view>
+      <view class="wm" wx:elif="{{resv.status === 'expired'}}">已过期</view>
+    </view>
+    <view class="resv-code">{{resv.resv_code}}</view>
+    <view class="copy-btn" bindtap="copyCode">复制预约码</view>
+    <view class="resv-session">{{resv.visit_date}} {{resv.session_name}} {{resv.session_time}}</view>
+    <view class="resv-info" wx:if="{{type === 'entry'}}">同行 {{resv.visitor_count}} 人 · 菏泽市科技博物馆</view>
+    <view class="resv-info" wx:else>{{resv.exhibit_title}} · {{resv.person_count}} 人 · 体验费 ¥{{resv.amount_cent / 100}} {{payText ? '· ' + payText : ''}}</view>
+    <view class="status-tag status-{{resv.status}}">{{statusText}}</view>
+    <view class="qr-tip" wx:if="{{type === 'entry'}}">入馆时向闸机出示此预约码, 或刷身份证直接核销</view>
+    <view class="qr-tip" wx:else>体验开始前向工作人员出示此凭证核验</view>
+  </view>
+
+  <view class="visitors-card" wx:if="{{resv && resv.visitors.length}}">
+    <view class="section-title">入馆人员</view>
+    <view class="visitor-row" wx:for="{{resv.visitors}}" wx:key="id_card_masked">
+      <text class="visitor-name">{{item.real_name}}</text>
+      <text class="visitor-card-no">{{item.id_card_masked}}</text>
+      <text class="visitor-state {{item.checked_in ? 'in' : ''}}">{{item.checked_in ? '已入馆' : '未入馆'}}</text>
+    </view>
+  </view>
+
+  <view class="ops" wx:if="{{resv}}">
+    <button wx:if="{{resv.status === 'booked'}}" class="cancel-btn" bindtap="cancel">取消预约</button>
+    <button class="home-btn" bindtap="goHome">返回首页</button>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && !resv}}">
+    <view>预约不存在或已删除</view>
+    <view>请从「扫码」页查看我的预约</view>
+  </view>
+</view>

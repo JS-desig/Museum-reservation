@@ -1,0 +1,72 @@
+<!-- 展项列表页 — 顶部门票式导航返回 + 展厅筛选 + 分组卡片列表 -->
+<view class="page">
+  <!-- 头部 -->
+  <view class="head">
+    <view class="head-card">
+      <view class="head-title font-trad">展厅展项</view>
+      <view class="head-sub">热门展项为付费体验项目 · 需先预约入馆 · 其余展项免费参观</view>
+    </view>
+  </view>
+
+  <!-- 展厅筛选 -->
+  <view class="hall-tabs" wx:if="{{hallTabs.length}}">
+    <scroll-view class="hall-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="hall-inner">
+        <view
+          class="hall-tab {{activeHall === item.name ? 'on' : ''}}"
+          wx:for="{{hallTabs}}"
+          wx:key="name"
+          data-name="{{item.name}}"
+          bindtap="selectHall"
+        >
+          {{item.name}} <text class="hall-count">{{item.count}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 分组列表 -->
+  <view class="container">
+    <block wx:if="{{halls.length}}">
+      <block wx:for="{{halls}}" wx:key="name" wx:for-index="hIdx">
+        <view class="hall-group" wx:if="{{activeHall === '全部' || activeHall === item.name}}">
+          <view class="group-title">
+            <view class="group-bar"></view>
+            <text class="font-trad">{{item.name}}</text>
+            <text class="group-count">{{item.exhibits.length}} 项</text>
+          </view>
+          <view class="m-card" wx:for="{{item.exhibits}}" wx:for-item="ex" wx:for-index="exIdx" wx:key="id" bindtap="goBooking">
+            <view class="m-poster">
+              <image wx:if="{{ex.img && !ex.imgFailed}}" class="m-poster-img" src="{{ex.img}}"
+                     mode="aspectFill" lazy-load binderror="onExhibitImgError" data-group="{{hIdx}}"
+                     data-index="{{exIdx}}" />
+              <view wx:else class="m-poster-ph">{{ex.ph}}</view>
+              <view wx:if="{{ex.is_special}}" class="special-badge">付费体验</view>
+            </view>
+            <view class="m-info">
+              <view class="m-name font-trad">{{ex.title}}</view>
+              <view class="m-type" wx:if="{{ex.media_type}}">
+                {{ex.media_type === 'video' ? '互动视频' : ex.media_type === 'audio' ? '语音导览' : '实物/图文展项'}}
+              </view>
+              <view class="m-desc">{{ex.description}}</view>
+              <view class="m-actions">
+                <!-- 特殊展项: 付费体验预约; 普通展项: 免费参观(跳入馆预约) -->
+                <block wx:if="{{ex.is_special}}">
+                  <view class="m-price">¥{{ex.priceYuan}}<text class="m-price-unit">/人</text></view>
+                  <view class="m-btn m-btn-special" catchtap="goExhibitBooking" data-group="{{hIdx}}" data-index="{{exIdx}}">体验预约</view>
+                </block>
+                <view wx:else class="m-btn" catchtap="goBooking">免费参观</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+    <view wx:elif="{{!loading}}" class="empty">
+      <view class="empty-ico">🔬</view>
+      <view>展厅展项筹备中</view>
+      <view class="empty-sub">敬请期待新展上线</view>
+    </view>
+    <view wx:if="{{loading}}" class="loading">加载中…</view>
+  </view>
+</view>

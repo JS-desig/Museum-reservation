@@ -1,0 +1,104 @@
+<!-- 我的 tab — 个人中心: 头部卡 + 实名卡 + 双凭证概览 + 分组菜单 -->
+<view class="page">
+  <!-- 黑名单提示条 -->
+  <view class="black-tip" wx:if="{{profile.is_blacklisted}}">
+    <view class="black-title">⚠ 账号已被列入黑名单</view>
+    <view class="black-reason" wx:if="{{profile.blacklist_reason}}">原因: {{profile.blacklist_reason}}</view>
+  </view>
+
+  <!-- ============ 用户信息卡 (渐变头) ============ -->
+  <view class="user-card">
+    <view class="user-row">
+      <view class="avatar"></view>
+      <view class="profile-text">
+        <view class="nickname-row">
+          <text class="nickname">{{nickname}}</text>
+        </view>
+        <view class="uid-row">
+          <text class="uid" wx:if="{{userId}}">ID: {{userId}}</text>
+        </view>
+      </view>
+      <!-- 实名状态独立块: 未实名时高亮可点 -->
+      <view class="ver-pill {{profile.is_verified ? 'ver-ok' : 'ver-todo'}}" bindtap="goRealname">
+        <view class="ver-dot"></view>
+        <text>{{profile.is_verified ? '已实名' : '去实名'}}</text>
+      </view>
+    </view>
+    <!-- 未实名引导条 -->
+    <view class="verify-guide" wx:if="{{profile.is_verified === 0}}" bindtap="goRealname">
+      <text>完成实名认证后即可预约参观与展项体验</text>
+      <view class="guide-arrow"></view>
+    </view>
+  </view>
+
+  <!-- ============ 凭证概览 (入馆 + 展项两行) ============ -->
+  <view class="stats">
+    <view class="stats-head">
+      <view class="stats-bar"></view>
+      <text class="stats-title font-trad">我的凭证</text>
+    </view>
+    <!-- 入馆预约行 -->
+    <view class="stat-row" bindtap="goReservations">
+      <view class="stat-cell">
+        <view class="stat-num">{{stats.resv}}</view>
+        <view class="stat-label">入馆预约</view>
+      </view>
+      <view class="stat-cell">
+        <view class="stat-num">{{stats.checked}}</view>
+        <view class="stat-label">已核销</view>
+      </view>
+      <view class="stat-cell">
+        <view class="stat-num {{stats.noshow ? 'num-warn' : ''}}">{{stats.noshow}}</view>
+        <view class="stat-label">爽约</view>
+      </view>
+      <view class="stat-cell">
+        <view class="stat-num">{{stats.pass}}</view>
+        <view class="stat-label">通行</view>
+      </view>
+    </view>
+    <!-- 展项体验行 (独立入口) -->
+    <view class="stat-row stat-row-sub" bindtap="goExReservations">
+      <view class="stat-cell">
+        <view class="stat-num num-gold">{{stats.exResv}}</view>
+        <view class="stat-label">展项预约</view>
+      </view>
+      <view class="stat-cell">
+        <view class="stat-num num-gold">{{stats.exPaid}}</view>
+        <view class="stat-label">已支付</view>
+      </view>
+      <view class="stat-cell">
+        <view class="stat-num num-gold">{{stats.exUsed}}</view>
+        <view class="stat-label">已体验</view>
+      </view>
+      <view class="stat-cell stat-cell-more">
+        <view class="row-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 功能菜单 (分组) ============ -->
+  <view class="menu-group-title">常用服务</view>
+  <view class="menu">
+    <block wx:for="{{menus}}" wx:key="key">
+      <!-- 在线客服: 用微信客服会话开放能力 -->
+      <button wx:if="{{item.service}}" class="row row-btn" open-type="contact">
+        <view class="row-left">
+          <view class="row-icon-box"><view class="row-icon ico-{{item.icon}}"></view></view>
+          <text class="row-text">{{item.text}}</text>
+        </view>
+        <view class="row-arrow"></view>
+      </button>
+
+      <view wx:else class="row" data-key="{{item.key}}" bindtap="onMenuTap">
+        <view class="row-left">
+          <view class="row-icon-box"><view class="row-icon ico-{{item.icon}}"></view></view>
+          <text class="row-text">{{item.text}}</text>
+        </view>
+        <view class="row-arrow"></view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 版本脚注 -->
+  <view class="foot">菏泽市科技博物馆 · 预约系统 v1.0</view>
+</view>

@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/tickets/tickets",
+    "pages/scan/scan",
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/booking/booking",
+    "pages/result/result",
+    "pages/realname/realname",
+    "pages/records/records",
+    "pages/exhibits/exhibits",
+    "pages/exhibit-booking/exhibit-booking"
+  ],
+  "window": {
+    "navigationBarTitleText": "菏泽市科技博物馆",
+    "navigationBarBackgroundColor": "#386B56",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#9ca3af",
+    "selectedColor": "#386B56",
+    "backgroundColor": "#ffffff",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/tickets/tickets", "text": "预约" },
+      { "pagePath": "pages/scan/scan", "text": "扫码" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
